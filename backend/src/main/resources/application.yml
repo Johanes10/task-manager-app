@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: task-manager-backend
+
+  # ── Base de datos H2 en memoria (perfil dev) ──────────────────────
+  datasource:
+    url: jdbc:h2:mem:taskdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  # ── JPA / Hibernate ───────────────────────────────────────────────
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop        # recrea el schema en cada arranque (dev)
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # ── Consola H2 (accesible en http://localhost:8080/h2-console) ────
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# ── Puerto del servidor ───────────────────────────────────────────
+server:
+  port: 8080
+
+# ── SpringDoc / Swagger UI ────────────────────────────────────────
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+# ── Logging ───────────────────────────────────────────────────────
+logging:
+  level:
+    com.taskmanager: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
